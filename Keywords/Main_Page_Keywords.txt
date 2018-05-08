@@ -1,0 +1,76 @@
+*** Settings ***
+Library    Selenium2Library
+Resource    ../Settings/Main_Page_Settings.txt
+Resource    ../Objects/Objects.txt
+
+*** Keyword ***
+Go To User Manual
+    Close Cookie Agrrement
+    Wait Until Page Contains Element  ${userManualLink}
+    Click Element     ${userManualLink}
+    Verify User Manual Page Displayed
+    
+Verify User Manual Page Displayed
+    Title Should Be   ${userManualTitle}
+    
+Close Cookie Agrrement
+    Wait Until Page Contains Element    ${cookiesBar} 
+    Click Element    ${cookiesOKBtn} 
+    Wait Until Page Does Not Contain Element    ${cookiesBar} 
+    
+Verify User Manual Sections
+    Page Should Contain Element    //h2[text()='${registrationLoginSec}']    
+    Page Should Contain Element    //h2[text()='${bananasSec}']   
+    Page Should Contain Element    //h2[text()='${giftsSec}']  
+    Page Should Contain Element    //h2[text()='${carmaSec}']  
+    Page Should Contain Element    //h2[text()='${commentsEvlSec}']   
+    Page Should Contain Element    //h2[text()='${materialsSec}']  
+    Page Should Contain Element    //h2[text()='${paymnetsSec}']   
+    
+Verify User Count 
+    Page Should Contain Element    ${userCount} 
+   
+Verify MainPage Variables
+    Page Should Contain Element    ${seznamSkol}
+    Page Should Contain Element    ${uzivatelskaPrirucka}
+    Page Should Contain Element    ${blog}
+    Page Should Contain Element    ${darky}
+    Page Should Contain Element    ${kontakt}
+    Page Should Contain Element    ${oNas}
+    Page Should Contain Element    ${podminkyUzivani}
+    
+Verify MainPage Variables Links
+    Click Element    ${cookies}
+    
+    Click Link    ${uzivatelskaPrirucka}
+    Location Should Contain    ${urluzivatelskaPrirucka}
+    Go Back
+    
+    Click Link    ${seznamSkol}
+    Location Should Contain     ${urlseznamSkol}
+    Go Back
+    
+    Click Element    ${blog}
+    Location Should Contain    ${urlblog}
+    Go Back
+    
+    Click Element    ${darky}
+    Location Should Contain    ${urldarky}
+    Go Back
+    
+    Click Element    ${kontakt}
+    Location Should Contain    ${urlkontakt}
+    Go Back
+    
+    Click Element    ${oNas} 
+    Location Should Contain    ${urloNas}
+    Go Back
+    
+    Click Element    ${podminkyUzivani}
+    Location Should Contain    ${urlpodminkyUzivani}
+    Go Back
+    
+ Verify Main Page Search
+     Click Link     ${searchField}
+     Wait Until Page Contains Element    ${searchBox}
+     Input Text     ${searchBox}     ${vse}
